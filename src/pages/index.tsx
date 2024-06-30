@@ -1,6 +1,7 @@
-import Title from "@/components/Title";
+import Title from "@/components/atoms/Title";
 import { useEffect, useState } from "react";
 import { getAllTodos } from "../../utils/supabaseFunction";
+import Sideber from "@/components/organisms/Sideber";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
           <p>{todo.description}</p>
         </div>
       ))}
+      <Sideber />
     </>
   );
 }
