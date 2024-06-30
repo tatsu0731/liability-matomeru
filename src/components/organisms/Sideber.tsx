@@ -7,16 +7,19 @@ export default function Sideber() {
         <div>
             <Title />
             {/* <Article /> */}
-            <p>梅原くん</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
-            <p>梅原</p>
+            <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債務対象一覧</h2>
+            <div className="">
+                <p>梅原くん</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+                <p>梅原</p>
+            </div>
         </div>
         <p className="mb-4 text-sm">ログアウト</p>
     </div>
