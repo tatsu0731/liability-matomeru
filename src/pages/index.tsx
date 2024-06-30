@@ -4,40 +4,21 @@ import { getAllTodos } from "../../utils/supabaseFunction";
 import Sideber from "@/components/organisms/Sideber";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/router";
+import Header from "@/components/organisms/Header";
 
 
 export default function Home() {
-  // const [todos, setTodos] = useState<any[]>([]);
-
-  // const router = useRouter();
-
-  // const handleLogOut = async () => {
-  //   const { error } = await supabase.auth.signOut()
-  //   if (error) throw new Error(error.message)
-  //   router.reload()
-  // }
-
-  // useEffect(() => {
-  //   const getTodos = async () => {
-  //     const todos = await getAllTodos();
-  //     setTodos(todos);
-  //     console.log(todos);
-  //   }
-  //   getTodos();
-  // }, []);
 
   return (
-    <>
-      <Title />
-      {/* {todos.map((todo) => (
-        <div key={todo.id}>
-          <h1>{todo.title}</h1>
-          <p>{todo.description}</p>
-        </div>
-      ))} */}
-      <p>ログインしました！</p>
+    <div className="flex">
       <Sideber />
-      {/* <p onClick={() => handleLogOut()}>ログアウトする</p> */}
-    </>
+      <div className="flex flex-col w-full">
+        <Header />
+        {/* 分岐する */}
+        <div className="my-auto mx-auto">
+          <h2 className=" text-gray-300 text-lg font-bold">債務対象ユーザーを選択してください</h2>
+        </div>
+      </div>
+    </div>
   );
 }

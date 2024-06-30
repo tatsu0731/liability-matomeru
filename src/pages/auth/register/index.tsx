@@ -12,7 +12,7 @@ export default function Register() {
     console.log(password)
     console.log(mailadress)
 
-    const handleSingUp = async (e: any) => {
+    const handleSignUp = async (e: any) => {
         e.preventDefault(); // デフォルトのフォーム送信を防ぐ
         try {
             const { error } = await supabase.auth.signUp({
@@ -29,10 +29,10 @@ export default function Register() {
 
     return (
         <section className="flex justify-center items-center h-screen">
-            <form onSubmit={handleSingUp} className="py-20 px-32 w-600 h-600 border-2 border-gray-300 rounded-2xl">
+            <form onSubmit={handleSignUp} className="py-20 px-32 w-600 h-600 border-2 border-gray-300 rounded-2xl">
                 <div className="flex flex-col items-center gap-y-4">
                     <h2 className="text-4xl font-bold text-emerald-400">負債-matomeru</h2>
-                    <h2 className="text-xl font-bold text-slate-500">Sing Up</h2>
+                    <h2 className="text-xl font-bold text-slate-500">Sign Up</h2>
                 </div>
                 <div className="mt-10">
                     <label htmlFor="email" className="text-xs block font-bold text-slate-600">メールアドレス</label>
