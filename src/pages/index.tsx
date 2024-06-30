@@ -2,10 +2,20 @@ import Title from "@/components/atoms/Title";
 import { useEffect, useState } from "react";
 import { getAllTodos } from "../../utils/supabaseFunction";
 import Sideber from "@/components/organisms/Sideber";
+import { supabase } from "../../utils/supabase";
+import { useRouter } from "next/router";
 
 
 export default function Home() {
   const [todos, setTodos] = useState<any[]>([]);
+
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw new Error(error.message)
+    router.reload()
+  }
 
   useEffect(() => {
     const getTodos = async () => {
@@ -26,6 +36,7 @@ export default function Home() {
         </div>
       ))}
       <Sideber />
+      <p onClick={() => handleLogOut()}>ログアウトする</p>
     </>
   );
 }
