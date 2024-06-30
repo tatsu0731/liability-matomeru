@@ -11,20 +11,20 @@ export default function Home() {
 
   const router = useRouter();
 
-  const handleLogOut = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) throw new Error(error.message)
-    router.reload()
-  }
+  // const handleLogOut = async () => {
+  //   const { error } = await supabase.auth.signOut()
+  //   if (error) throw new Error(error.message)
+  //   router.reload()
+  // }
 
-  useEffect(() => {
-    const getTodos = async () => {
-      const todos = await getAllTodos();
-      setTodos(todos);
-      console.log(todos);
-    }
-    getTodos();
-  }, []);
+  // useEffect(() => {
+  //   const getTodos = async () => {
+  //     const todos = await getAllTodos();
+  //     setTodos(todos);
+  //     console.log(todos);
+  //   }
+  //   getTodos();
+  // }, []);
 
   return (
     <>
@@ -35,8 +35,9 @@ export default function Home() {
           <p>{todo.description}</p>
         </div>
       ))}
+      <p>ログインしました！</p>
       <Sideber />
-      <p onClick={() => handleLogOut()}>ログアウトする</p>
+      {/* <p onClick={() => handleLogOut()}>ログアウトする</p> */}
     </>
   );
 }

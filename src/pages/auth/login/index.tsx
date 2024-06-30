@@ -25,7 +25,7 @@ export default function Login() {
         } catch (error: any) {
             console.log(error.message);
         }
-      };
+    };
 
     return (
         <section className="flex justify-center items-center h-screen">
