@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 
 
 export default function Home() {
-  const [todos, setTodos] = useState<any[]>([]);
+  // const [todos, setTodos] = useState<any[]>([]);
 
-  const router = useRouter();
+  // const router = useRouter();
 
   // const handleLogOut = async () => {
   //   const { error } = await supabase.auth.signOut()
@@ -29,12 +29,12 @@ export default function Home() {
   return (
     <>
       <Title />
-      {todos.map((todo) => (
+      {/* {todos.map((todo) => (
         <div key={todo.id}>
           <h1>{todo.title}</h1>
           <p>{todo.description}</p>
         </div>
-      ))}
+      ))} */}
       <p>ログインしました！</p>
       <Sideber />
       {/* <p onClick={() => handleLogOut()}>ログアウトする</p> */}
