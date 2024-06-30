@@ -6,9 +6,9 @@ export default function Sideber() {
     return (
     <div className=" w-60 h-screen px-4 bg-emerald-400 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
+            <Link href="/">
             <Title />
-            {/* <Article /> */}
-            <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債務対象一覧</h2>
+            </Link>
             <div className="">
                 {/* hrefにkeyなりidが入るはず */}
                 <Link href="[1].tsx">
