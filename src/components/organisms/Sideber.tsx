@@ -10,6 +10,7 @@ export default function Sideber() {
             <Title />
             </Link>
             <div className="">
+                <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債務対象一覧</h2>
                 {/* hrefにkeyなりidが入るはず */}
                 <Link href="[1].tsx">
                     <p>梅原くん</p>
