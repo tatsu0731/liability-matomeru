@@ -6,7 +6,7 @@ export default function Header() {
                 {title && title}
             </h1>
             <ul className="text-sm text-slate-500">
-                <li>ヘルプ</li>
+                <a href="https://ushio-hp.vercel.app/"><li>ヘルプ</li></a>
             </ul>
         </header>
     )
