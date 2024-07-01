@@ -4,6 +4,7 @@ import Sideber from "@/components/organisms/Sideber";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/router";
 import Header from "@/components/organisms/Header";
+import { getUserId } from "../../utils/supabaseFunction";
 
 
 export default function Home() {

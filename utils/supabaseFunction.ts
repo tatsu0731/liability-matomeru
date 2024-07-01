@@ -11,3 +11,13 @@ export const getThanks =  async () => {
     console.log(thanks.data);
     return thanks.data;
 };
+
+// ログインしているユーザーのthanksだけ取得する
+export const getUserId =  async () => {
+    const {
+        data: { user },
+    } = await supabase.auth.getUser()
+    let user_id = user?.user_metadata.sub
+    console.log(user_id);
+    return user_id;
+};
