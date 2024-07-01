@@ -1,6 +1,5 @@
 import Title from "@/components/atoms/Title";
 import { useEffect, useState } from "react";
-import { getAllTodos } from "../../utils/supabaseFunction";
 import Sideber from "@/components/organisms/Sideber";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/router";
