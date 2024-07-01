@@ -8,6 +8,24 @@ import Header from "@/components/organisms/Header";
 
 
 export default function Home() {
+  const [thanks, setThanks] = useState<any>([]);
+
+  useEffect(() => {
+    const getThanks = async () => {
+      let { data: Thanks, error } = await supabase
+        .from('Thanks')
+        .select(`
+          title,
+          Target (
+            target_id
+          )
+        `)
+      setThanks(Thanks);
+    }
+    getThanks();
+  },[])
+
+  console.log(thanks)
 
   return (
     <div className="flex">
