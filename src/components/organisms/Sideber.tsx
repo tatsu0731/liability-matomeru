@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Article from "../atoms/Article";
 import Title from "../atoms/Title";
-import { getTargets } from "../../../utils/supabaseFunction";
+import { getTargets, getTargetsByUserId, getUserId } from "../../../utils/supabaseFunction";
 
 import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
@@ -18,20 +18,22 @@ export default function Sideber() {
     }[]>([]);
 
     useEffect(() => {
-        const fetchTargets = async () => {
-            const data = await getTargets();
+        const fetchTargetsByUserId = async () => {
+            const user_id = await getUserId();
+            const data = await getTargetsByUserId(user_id);
             if (data !== null) {
                 setTargets(data);
             }
         };
-        fetchTargets();
+        fetchTargetsByUserId();
     }, []);
 
     const router = useRouter();
 
     const signOut = async () => {
         await supabase.auth.signOut();
-        router.reload();
+        router.push('/auth/login');
+        // router.reload();
     };
 
     return (

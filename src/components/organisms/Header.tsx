@@ -19,7 +19,7 @@ export default function Header() {
     return(
         <header className="flex justify-between py-2 px-8">
             <h1 className="font-bold text-xl text-gray-600">
-                {title && title}
+                {title && title}への負債一覧
             </h1>
             <ul className="text-sm text-slate-500 flex gap-4">
                 <li className="text-emerald-400"><span className="text-gray-600">ユーザー：</span>{userEmail}</li>

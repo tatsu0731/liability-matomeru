@@ -4,28 +4,10 @@ import Sideber from "@/components/organisms/Sideber";
 import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/router";
 import Header from "@/components/organisms/Header";
-import { getUserId } from "../../utils/supabaseFunction";
+import { getTargetsByUserId, getUserId } from "../../utils/supabaseFunction";
 
 
 export default function Home() {
-  const [thanks, setThanks] = useState<any>([]);
-
-  useEffect(() => {
-    const getThanks = async () => {
-      let { data: Thanks, error } = await supabase
-        .from('Thanks')
-        .select(`
-          title,
-          Target (
-            target_id
-          )
-        `)
-      setThanks(Thanks);
-    }
-    getThanks();
-  },[])
-
-  console.log(thanks)
 
   return (
     <div className="flex">
