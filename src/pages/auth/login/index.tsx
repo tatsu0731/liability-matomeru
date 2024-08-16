@@ -6,6 +6,7 @@ import Link from "next/link"
 export default function Login() {
     const [mailadress, setMailadress] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
 
     const router = useRouter();
 
@@ -24,6 +25,7 @@ export default function Login() {
             await router.push("/")
         } catch (error: any) {
             console.log(error.message);
+            setError(true)
         }
     };
 
@@ -33,6 +35,7 @@ export default function Login() {
             <div className="flex flex-col items-center gap-y-4">
                 <h2 className="text-4xl font-bold text-emerald-400">負債-matomeru</h2>
                 <h2 className="text-xl font-bold text-slate-500">Log in</h2>
+                {error && <p className="text-red-400 text-sm">ログインに失敗しました</p>}
             </div>
             <div className="mt-10">
                 <label htmlFor="email" className="text-xs block font-bold text-slate-600">メールアドレス</label>
