@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase"
+import { useRouter } from "next/router";
 
 export default function Header() {
-    const title = "This is Title"
-
     const [user, setUser] = useState<any | null>(null);
+    const [title, setTitle] = useState<string | null>("債務者");
+
+    const router = useRouter();
 
     useEffect(() => {
         const fetchUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
         };
+        const fetchTargets = async () => {
+            let { data, error } = await supabase
+                .from('Targets')
+                .select('title')
+                .eq('id', router.query.id)
+                // ここの書き方で本当にいいのだろうか
+            if (data && data.length > 0) {
+                setTitle(data[0].title);
+            }
+        }
         fetchUser();
-    }, []);
+        fetchTargets();
+    }, [router]);
     console.log(user)
 
     const userEmail = user?.user_metadata.email;
