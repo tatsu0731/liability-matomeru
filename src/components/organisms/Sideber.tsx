@@ -74,7 +74,7 @@ export default function Sideber() {
                 ))}
                 <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債務対象新規作成</h2>
                 <form>
-                    <input type="text" placeholder="債務対象名" className="text-black px-1 rounded-md" value={targetUser} onChange={(e) => setTargetUser(e.target.value)}/>
+                    <input type="text" placeholder="債務対象名" className="text-black px-1 rounded-md" onChange={(e) => setTargetUser(e.target.value)}/>
                     {error && <p className="text-red-400 text-sm">作成に失敗しました</p>}
                     <button className=" text-emerald-400 py-1 px-4 bg-white rounded-md mt-2 shadow-sm" onClick={handleSubmit}>作成</button>
                 </form>

@@ -18,7 +18,7 @@ export default function Create() {
             const { data, error } = await supabase
             .from('Thanks')
             .insert([
-            { title: title, description: description, done: false, target_id: await router.query.id },
+            { title: title, description: description, done: false, target_id: router.query.id },
             ])
             .select()
             router.push(`/${router.query.id}`);

@@ -1,0 +1,16 @@
+{
+    "name": "Liability matomeru",
+    "short_name": "Liability matomeru",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#34d399",
+    "theme_color": "#34d399",
+    "description": "拡張機能の説明",
+    "icons": [
+        {
+        "src": "images/icon-128x128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+        }
+    ]
+}

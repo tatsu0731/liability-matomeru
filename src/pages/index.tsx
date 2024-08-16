@@ -5,12 +5,17 @@ import { supabase } from "../../utils/supabase";
 import { useRouter } from "next/router";
 import Header from "@/components/organisms/Header";
 import { getTargetsByUserId, getUserId } from "../../utils/supabaseFunction";
+import Head from "next/head";
 
 
 export default function Home() {
 
   return (
-    <div className="flex">
+    <>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
+      <div className="flex">
       <Sideber />
       <div className="flex flex-col w-full">
         <Header />
@@ -23,5 +28,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }
