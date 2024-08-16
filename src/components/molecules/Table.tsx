@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Button from "../atoms/Button";
 import { getThanks } from "../../../utils/supabaseFunction";
+import { supabase } from "../../../utils/supabase";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Table() {
-
     const [thanks, setThanks] = useState<{
         id: number;
         title: string;
@@ -12,16 +14,23 @@ export default function Table() {
         description: string;
         user_id: string
     }[]>([]);
-
+    const [id, setId] = useState<number | null>(null);
+    const router = useRouter();
+    // ここを条件としてid=router.query.idのデータだけ取得するように変更
     useEffect(() => {
+        setId(Number(router.query.id));
         const fetchTargets = async () => {
-            const data = await getThanks();
-            if (data !== null) {
-                setThanks(data);
-            }
+            // const data = await getThanks();
+        let { data: thanks, error } = await supabase
+        .from('Thanks')
+        .select('*')
+        .eq('target_id', router.query.id)
+        if (thanks !== null) {
+            setThanks(thanks);
+        }
         };
         fetchTargets();
-    }, []);
+    }, [router.query.id]);
 
     // 日付変換
     const DateToJST = (item: string) => {
@@ -39,7 +48,9 @@ export default function Table() {
     return (
         <section>
                 <div className="flex justify-end mt-10 mr-24">
-                    <Button title={"新規作成"} size={"md"} color={"orange"}></Button>
+                <Link href={`/${id}/create`}>
+                    <button className={`font-bold text-white text-md bg-orange-400 py-2 px-8 bg-orange-4000 rounded-lg shadow hover:bg-orange-600`}>新規作成</button>
+                </Link>
                 </div>
                 <div className="flex flex-col py-4 px-24">
                     <div className="border-t-2 border-x-2 rounded-lg">
@@ -48,7 +59,7 @@ export default function Table() {
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center">
                                         <div>
-                                            <h2 className="text-xs font-bold"><span className="text-emerald-400">■</span> タイトル</h2>
+                                            <h2 className="text-xs font-bold"><span className="text-emerald-400">■</span> 返済物</h2>
                                             <p className="text-sm">{thank.title}</p>
                                         </div>
                                     </div>
@@ -58,10 +69,6 @@ export default function Table() {
                                         </div>
                                         <Button title={"返済完了"} size={"xs"} color={"emerald"}></Button>
                                     </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-xs font-bold">返済物</h3>
-                                    <p className="text-sm">{thank.title}</p>
                                 </div>
                                 <div>
                                     <h3 className="text-xs font-bold">説明</h3>

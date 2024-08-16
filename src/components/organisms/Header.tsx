@@ -13,6 +13,7 @@ export default function Header() {
         };
         fetchUser();
     }, []);
+    console.log(user)
 
     const userEmail = user?.user_metadata.email;
 
