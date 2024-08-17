@@ -8,7 +8,12 @@ export default function Header() {
 
     const router = useRouter();
 
+    const userEmail = user?.user_metadata.email;
+
     useEffect(() => {
+        if (!userEmail) {
+            router.push('/auth/login');
+        }
         const fetchUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
@@ -25,11 +30,7 @@ export default function Header() {
         }
         fetchUser();
         fetchTargets();
-    }, [router]);
-    console.log(user)
-
-    const userEmail = user?.user_metadata.email;
-
+    }, [router, userEmail]);
     return(
         <header className="flex justify-between py-2 px-8">
             <h1 className="font-bold text-xl text-gray-600">
