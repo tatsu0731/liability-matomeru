@@ -25,6 +25,7 @@ export default function Table() {
         .from('Thanks')
         .select('*')
         .eq('target_id', router.query.id)
+        .is('done', false)
         if (thanks !== null) {
             setThanks(thanks);
         }
@@ -45,6 +46,15 @@ export default function Table() {
         return (yyyymmdd);
     };
 
+    const handleRepayDebt = async (id) => {
+        const { data, error } = await supabase
+        .from('Thanks')
+        .update({ done: true })
+        .eq('id', id)
+        .select()
+        router.reload()
+    }
+
     return (
         <section>
                 <div className="flex justify-end mt-10 mr-24">
@@ -55,7 +65,7 @@ export default function Table() {
                 <div className="flex flex-col py-4 px-24">
                     <div className="border-t-2 border-x-2 rounded-lg">
                         {thanks.map((thank) => (
-                            <div key={thank.id} className=" border-b-2 py-2 px-8 flex flex-col gap-y-4 text-slate-600">
+                            <div key={thank.id} onClick={() => handleRepayDebt(thank.id)} className=" border-b-2 py-2 px-8 flex flex-col gap-y-4 text-slate-600">
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center">
                                         <div>

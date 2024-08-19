@@ -6,7 +6,6 @@ export const getUserId =  async () => {
         data: { user },
     } = await supabase.auth.getUser()
     let user_id = user?.user_metadata.sub
-    console.log(user_id);
     return user_id;
 };
 

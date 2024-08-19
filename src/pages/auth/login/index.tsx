@@ -14,13 +14,12 @@ export default function Login() {
     console.log(mailadress)
 
     const handleLogin = async (e:any) => {
-        e.preventDefault(); // デフォルトのフォーム送信を防ぐ
+        e.preventDefault();
         try {
             const { error } = await supabase.auth.signInWithPassword({
                 email: mailadress,
                 password: password,
             });
-            if (error) throw error;
             console.log("Login successful!");
             await router.push("/")
         } catch (error: any) {

@@ -3,7 +3,7 @@ import { supabase } from "../../../utils/supabase"
 import { useRouter } from "next/router";
 
 export default function Header() {
-    const [user, setUser] = useState<any | null>(null);
+    const [user, setUser] = useState<string | null>(null);
     const [title, setTitle] = useState<string | null>("債務者");
 
     const router = useRouter();
@@ -11,9 +11,7 @@ export default function Header() {
     const userEmail = user?.user_metadata.email;
 
     useEffect(() => {
-        if (!userEmail) {
-            router.push('/auth/login');
-        }
+
         const fetchUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);

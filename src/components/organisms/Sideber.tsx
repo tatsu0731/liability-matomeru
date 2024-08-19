@@ -1,10 +1,8 @@
 import Link from "next/link";
-import Article from "../atoms/Article";
 import Title from "../atoms/Title";
-import { getTargets, getTargetsByUserId, getUserId } from "../../../utils/supabaseFunction";
+import { getTargetsByUserId, getUserId } from "../../../utils/supabaseFunction";
 
 import { useEffect, useState } from "react";
-import Button from "../atoms/Button";
 import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/router";
 
@@ -19,16 +17,18 @@ export default function Sideber() {
 
     const [targetUser, setTargetUser] = useState<string | null>(null);
     const [error, setError] = useState<boolean>(false);
+    const [userId, setUserId] = useState<string | null>(null);
+
 
     const [targetId, setTargetId] = useState<number | null>(null);
-    console.log(targetId)
 
     useEffect(() => {
         const fetchTargetsByUserId = async () => {
             const user_id = await getUserId();
-            const data = await getTargetsByUserId(user_id);
-            if (data !== null) {
-                setTargets(data);
+            setUserId(user_id)
+            const targets = await supabase.from('Targets').select('*').eq('user_id', '118687af-848e-4e60-a8ca-7016585bd9e7');
+            if (targets.data !== null) {
+                setTargets(targets.data);
             }
         };
         fetchTargetsByUserId();
@@ -48,11 +48,10 @@ export default function Sideber() {
             const { data, error } = await supabase
             .from('Targets')
             .insert([
-            { title: targetUser, status: false, user_id: await getUserId() },
+            { title: targetUser, status: false, user_id: userId },
             ])
             .select()
             router.reload();
-            console.log(targetUser)
         } catch (error) {
             setError(true)
             console.log(error)
