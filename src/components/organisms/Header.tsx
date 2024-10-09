@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase"
 import { useRouter } from "next/router";
+import { User } from "@supabase/supabase-js";
 
 export default function Header() {
-    const [user, setUser] = useState<string | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [title, setTitle] = useState<string | null>("債務者");
 
     const router = useRouter();
