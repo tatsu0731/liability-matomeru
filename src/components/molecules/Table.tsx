@@ -46,7 +46,7 @@ export default function Table() {
         return (yyyymmdd);
     };
 
-    const handleRepayDebt = async (id) => {
+    const handleRepayDebt = async (id: number) => {
         const { data, error } = await supabase
         .from('Thanks')
         .update({ done: true })
