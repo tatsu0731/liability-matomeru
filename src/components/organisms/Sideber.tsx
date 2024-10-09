@@ -51,7 +51,9 @@ export default function Sideber() {
             { title: targetUser, status: false, user_id: userId },
             ])
             .select()
-            router.reload();
+            if (!error) {
+                setTargets((prevTargets) => [...prevTargets, ...data])
+            }
         } catch (error) {
             setError(true)
             console.log(error)
