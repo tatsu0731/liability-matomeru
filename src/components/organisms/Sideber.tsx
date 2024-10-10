@@ -61,7 +61,7 @@ export default function Sideber() {
     }
 
     return (
-    <div className=" w-60 h-screen px-4 bg-emerald-400 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
+    <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-60% via-sky-400 to-indigo-500 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
             <Link href="/">
             <Title />
