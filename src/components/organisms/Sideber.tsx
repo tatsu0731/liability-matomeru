@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/router";
 import Thanks from "../atoms/Thanks";
+import Copyright from "../atoms/Copyright";
+import Image from "next/image";
 
 export default function Sideber() {
     const [targets, setTargets] = useState<{
@@ -57,7 +59,7 @@ export default function Sideber() {
     }
 
     return (
-    <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-60% via-sky-400 to-indigo-500 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
+    <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-70% to-sky-400 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
             <Link href="/">
             <Title />
@@ -75,7 +77,13 @@ export default function Sideber() {
                 </form>
             </div>
         </div>
-        <button className="mb-4 text-sm" onClick={() => signOut()}>ログアウト</button>
+        <div className="mb-4 flex flex-col  gap-4">
+            <button className="text-sm flex items-center gap-1" onClick={() => signOut()}>
+                <Image src={"log-out.svg"} width={16} height={16} alt=""/>
+                <p>ログアウト</p>
+            </button>
+            <Copyright />
+        </div>
     </div>
     )
 }

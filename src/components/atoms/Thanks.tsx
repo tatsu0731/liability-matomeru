@@ -48,7 +48,7 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     return(
         <div className={hover ? "flex justify-between mt-1 bg-white/40 rounded-md" : "flex justify-between mt-1"} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <Link href={`/${target.id}`} key={target.id}>
-                <p className="ml-2">{replaceTitle(target.title)} <span className=" text-red-400">{countThanks(target.Thanks.length)}</span></p>
+                <p className="ml-2 min-w-40">{replaceTitle(target.title)} <span className=" text-red-400">{countThanks(target.Thanks.length)}</span></p>
             </Link>
             {hover && <p className="text-white mr-2 cursor-pointer" onClick={handleDeleteTarget}>×</p>}
         </div>
