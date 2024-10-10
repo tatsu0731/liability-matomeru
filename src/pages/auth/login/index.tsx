@@ -10,22 +10,17 @@ export default function Login() {
 
     const router = useRouter();
 
-    console.log(password)
-    console.log(mailadress)
-
-    const handleLogin = async (e:any) => {
+    const handleLogin = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        try {
-            const { error } = await supabase.auth.signInWithPassword({
-                email: mailadress,
-                password: password,
-            });
+        const { error } = await supabase.auth.signInWithPassword({
+            email: mailadress,
+            password: password,
+        });
+        if (!error) {
             console.log("Login successful!");
             await router.push("/")
-        } catch (error: any) {
-            console.log(error.message);
-            setError(true)
         }
+        setError(true)
     };
 
     return (
@@ -34,7 +29,7 @@ export default function Login() {
             <div className="flex flex-col items-center gap-y-4">
                 <h2 className="text-4xl font-bold text-emerald-400">負債-matomeru</h2>
                 <h2 className="text-xl font-bold text-slate-500">Log in</h2>
-                {error && <p className="text-red-400 text-sm">ログインに失敗しました</p>}
+                {error && <p className="text-red-400 text-sm">メールアドレスかパスワードが誤っています</p>}
             </div>
             <div className="mt-10">
                 <label htmlFor="email" className="text-xs block font-bold text-slate-600">メールアドレス</label>

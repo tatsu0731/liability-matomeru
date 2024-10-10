@@ -10,22 +10,16 @@ export default function Register() {
 
     const router = useRouter();
 
-    console.log(password)
-    console.log(mailadress)
-
     const handleSignUp = async (e: any) => {
-        e.preventDefault(); // デフォルトのフォーム送信を防ぐ
-        try {
-            const { error } = await supabase.auth.signUp({
-                email: mailadress,
-                password: password,
-            });
-            if (error) throw error;
-            console.log('サインアップに成功しました！');
+        e.preventDefault();
+        const { error } = await supabase.auth.signUp({
+            email: mailadress,
+            password: password,
+        });
+        if (!error) {
             await router.push("/")
-        } catch (error: any) {
-            console.error(error.message);
         }
+        setError(true)
     };
 
     return (
@@ -34,7 +28,7 @@ export default function Register() {
                 <div className="flex flex-col items-center gap-y-4">
                     <h2 className="text-4xl font-bold text-emerald-400">負債-matomeru</h2>
                     <h2 className="text-xl font-bold text-slate-500">Sign Up</h2>
-                    {error && <p className="text-red-400 text-sm">ログインに失敗しました</p>}
+                    {error && <p className="text-red-400 text-sm">登録に失敗しました</p>}
                 </div>
                 <div className="mt-10">
                     <label htmlFor="email" className="text-xs block font-bold text-slate-600">メールアドレス</label>
