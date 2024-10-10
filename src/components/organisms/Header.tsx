@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase"
 import { useRouter } from "next/router";
 import { User } from "@supabase/supabase-js";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
     const [user, setUser] = useState<User | null>(null);
-    const [title, setTitle] = useState<string | null>("債務者");
+    const [title, setTitle] = useState<string | null>("債権者");
 
     const router = useRouter();
 
@@ -37,7 +39,12 @@ export default function Header() {
             </h1>
             <ul className="text-sm text-slate-500 flex gap-4">
                 <li className="text-emerald-400"><span className="text-gray-600">ユーザー：</span>{userEmail}</li>
-                <a href="https://ushio-hp.vercel.app/"><li>ヘルプ？</li></a>
+                <Link href={"/help"}>
+                    <li className="flex gap-1">
+                    <span>ヘルプ：</span>
+                    <Image src={"help-circle.svg"} width={20} height={20} alt="ヘルプ"/>
+                    </li>
+                </Link>
             </ul>
         </header>
     )

@@ -87,7 +87,7 @@ export default function Table() {
                 </div>
                 <div className="flex flex-col py-4 px-24 gap-4">
                     {thanks.map((thank) => (
-                        <div key={thank.id} className={`border-2 rounded-md ${isMoreThan14DaysAgo(thank.created_at) ? "border-red-400" : ""}`}>
+                        <div key={thank.id} className={`border-2 rounded-md ${isMoreThan14DaysAgo(thank.created_at) ? "border-red-300" : ""}`}>
                             <div className="py-2 px-8 flex flex-col gap-y-4 text-slate-600">
                                 <div className="flex justify-between items-center">
                                     <div className="flex items-center">
@@ -108,7 +108,7 @@ export default function Table() {
                                     <p className="text-sm">{thank.description}</p>
                                 </div>
                                 {isMoreThan14DaysAgo(thank.created_at) &&
-                                    <div className=" border-2 border-red-400 rounded py-4 bg-stone-100 flex pl-4">
+                                    <div className=" border-1 border-red-400 rounded py-4 bg-stone-100 flex pl-4">
                                         <Image src={"alert-circle.svg"} width={20} height={20} alt="警告"/>
                                         <div className="text-sm font-bold text-red-400 ml-4">負債発行から14日以上過ぎています！迅速に返済手続きをしましょう！</div>
                                     </div>
