@@ -8,7 +8,6 @@
     "description": "拡張機能の説明",
     "icons": [
         {
-        "src": "images/icon-128x128.png",
         "sizes": "128x128",
         "type": "image/png"
         }

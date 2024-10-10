@@ -26,9 +26,9 @@ export default function Sideber() {
         const fetchTargetsByUserId = async () => {
             const user_id = await getUserId();
             setUserId(user_id)
-            const targets = await supabase.from('Targets').select('*').eq('user_id', user_id);
-            if (targets.data !== null) {
-                setTargets(targets.data);
+            const { data, error } = await supabase.from('Targets').select('*').eq('user_id', user_id);
+            if (!error) {
+                setTargets(data);
             }
         };
         fetchTargetsByUserId();
@@ -55,7 +55,6 @@ export default function Sideber() {
             }
         } catch (error) {
             setError(true)
-            console.log(error)
         }
     }
 
