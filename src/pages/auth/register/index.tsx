@@ -23,8 +23,8 @@ export default function Register() {
     };
 
     return (
-        <section className="flex justify-center items-center h-screen">
-            <form onSubmit={handleSignUp} className="py-20 px-32 w-600 h-600 border-2 border-gray-300 rounded-2xl">
+        <section className="flex justify-center items-center h-screen bg-gradient-to-b from-emerald-400 from-70% to-sky-400">
+            <form onSubmit={handleSignUp} className="py-20 px-32 w-600 h-600 border-2 border-gray-300 rounded-2xl bg-white">
                 <div className="flex flex-col items-center gap-y-4">
                     <h2 className="text-4xl font-bold text-emerald-400">負債-matomeru</h2>
                     <h2 className="text-xl font-bold text-slate-500">Sign Up</h2>
