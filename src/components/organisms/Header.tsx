@@ -42,7 +42,7 @@ export default function Header() {
                 <Link href={"/help"}>
                     <li className="flex gap-1">
                     <span>ヘルプ：</span>
-                    <Image src={"help-circle.svg"} width={20} height={20} alt="ヘルプ"/>
+                    <Image src={"help-circle.svg"} width={20} height={20} alt=""/>
                     </li>
                 </Link>
             </ul>

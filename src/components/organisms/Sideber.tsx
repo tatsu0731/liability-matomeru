@@ -5,6 +5,7 @@ import { getUserId } from "../../../utils/supabaseFunction";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/router";
+import Thanks from "../atoms/Thanks";
 
 export default function Sideber() {
     const [targets, setTargets] = useState<{
@@ -12,27 +13,25 @@ export default function Sideber() {
         title: string;
         created_at: string;
         status: boolean;
-        user_id: string
+        user_id: string;
+        Thanks: [];
     }[]>([]);
 
     const [targetUser, setTargetUser] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [userId, setUserId] = useState<string | null>(null);
 
-
-    const [targetId, setTargetId] = useState<number | null>(null);
-
     useEffect(() => {
         const fetchTargetsByUserId = async () => {
             const user_id = await getUserId();
             setUserId(user_id)
-            const { data, error } = await supabase.from('Targets').select('*').eq('user_id', user_id);
+            const { data, error } = await supabase.from('Targets').select(`*, Thanks(target_id, done)`).eq('user_id', user_id).eq('Thanks.done', false);
             if (!error) {
                 setTargets(data);
             }
         };
         fetchTargetsByUserId();
-    }, []);
+    }, [targets]);
 
     const router = useRouter();
 
@@ -57,15 +56,6 @@ export default function Sideber() {
         setError(true)
     }
 
-    // 10文字以上を...で置換する関数
-    const replaceTitle = (title:string) => {
-        if (title.length > 10) {
-            title = title.slice(0, 10)
-            title = title + "...";
-        }
-        return title
-    }
-
     return (
     <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-60% via-sky-400 to-indigo-500 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
@@ -75,9 +65,7 @@ export default function Sideber() {
             <div className="">
                 <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債権者一覧</h2>
                 {targets.map((target) => (
-                    <Link href={`/${target.id}`} key={target.id}>
-                        <p onClick={() => setTargetId(target.id)}>{replaceTitle(target.title)}</p>
-                    </Link>
+                    <Thanks target={target} key={target.id} setTargets={setTargets}/>
                 ))}
                 <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債権者新規作成</h2>
                 <form>
