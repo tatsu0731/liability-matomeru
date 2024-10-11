@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase"
 import { useRouter } from "next/router";
 import { User } from "@supabase/supabase-js";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header() {
+type headerProps = {
+    title: string,
+    setTitle: React.Dispatch<SetStateAction<string>>
+}
+
+export default function Header({title, setTitle}: headerProps) {
     const [user, setUser] = useState<User | null>(null);
-    const [title, setTitle] = useState<string | null>("債権者");
 
     const router = useRouter();
 
@@ -31,11 +35,11 @@ export default function Header() {
         }
         fetchUser();
         fetchTargets();
-    }, [router, userEmail]);
+    }, [router, userEmail, setTitle]);
     return(
         <header className="flex justify-between py-2 px-8">
             <h1 className="font-bold text-xl text-gray-600">
-                {title && title}への負債一覧
+                {title}への負債一覧
             </h1>
             <ul className="text-sm text-slate-500 flex gap-4">
                 <li className="text-emerald-400"><span className="text-gray-600">ユーザー：</span>{userEmail}</li>

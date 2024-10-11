@@ -2,14 +2,16 @@ import Link from "next/link";
 import Title from "../atoms/Title";
 import { getUserId } from "../../../utils/supabaseFunction";
 
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/router";
 import Thanks from "../atoms/Thanks";
 import Copyright from "../atoms/Copyright";
 import Image from "next/image";
 
-export default function Sideber() {
+type setTitleType = Dispatch<SetStateAction<string>>
+
+export default function Sideber({setTitle}: {setTitle: setTitleType}) {
     const [targets, setTargets] = useState<{
         id: number;
         title: string;
@@ -62,7 +64,7 @@ export default function Sideber() {
     <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-70% to-sky-400 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
             <Link href="/">
-            <Title />
+            <Title setTitle={setTitle}/>
             </Link>
             <div className="">
                 <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債権者一覧</h2>
