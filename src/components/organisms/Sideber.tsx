@@ -24,6 +24,7 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
     const [targetUser, setTargetUser] = useState<string>("");
     const [error, setError] = useState<boolean>(false);
     const [userId, setUserId] = useState<string | null>(null);
+    const [comment, setComment] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchTargetsByUserId = async () => {
@@ -35,7 +36,13 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
             }
         };
         fetchTargetsByUserId();
-    }, [targets]);
+
+        if (targets.length >= 5) {
+            setComment(true)
+        } else {
+            setComment(false)
+        }
+    }, [targets.length]);
 
     const router = useRouter();
 
@@ -60,6 +67,17 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
         setError(true)
     }
 
+    const randomComments = () => {
+        const value = Math.floor(Math.random() * 3);
+        return comments[value]
+    }
+
+    const comments = [
+        "一番良いのは借りを作らないことだと思うよ、、、",
+        "自分を見直してみない、、、？",
+        "たくさんの人に迷惑かけてるね、、、",
+    ]
+
     return (
     <div className=" w-60 h-screen px-4 bg-gradient-to-b from-emerald-400 from-70% to-sky-400 text-white flex flex-col justify-between items-center border-r-2 border-slate-300">
         <div>
@@ -79,13 +97,18 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
                 </form>
             </div>
         </div>
-        <div className="mb-4 flex flex-col  gap-4">
-            <button className="text-sm flex items-center gap-1" onClick={() => signOut()}>
-                <Image src={"log-out.svg"} width={16} height={16} alt=""/>
-                <p>ログアウト</p>
-            </button>
-            <Copyright />
-        </div>
+            <div className="mb-4 flex flex-col gap-4 items-center">
+                {comment &&
+                    <div className="border-2 rounded-md mb-8">
+                        <p className="p-2">{randomComments()}</p>
+                    </div>
+                }
+                <button className="text-sm flex items-center gap-1" onClick={() => signOut()}>
+                    <Image src={"log-out.svg"} width={16} height={16} alt=""/>
+                    <p>ログアウト</p>
+                </button>
+                <Copyright />
+            </div>
     </div>
     )
 }
