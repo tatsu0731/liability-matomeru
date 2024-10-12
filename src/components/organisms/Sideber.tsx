@@ -2,7 +2,7 @@ import Link from "next/link";
 import Title from "../atoms/Title";
 import { getUserId } from "../../../utils/supabaseFunction";
 
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { supabase } from "../../../utils/supabase";
 import { useRouter } from "next/router";
 import Thanks from "../atoms/Thanks";
@@ -25,6 +25,8 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
     const [error, setError] = useState<boolean>(false);
     const [userId, setUserId] = useState<string | null>(null);
     const [comment, setComment] = useState<boolean>(false);
+
+    const targetUserRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         const fetchTargetsByUserId = async () => {
@@ -53,26 +55,42 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+
+        const targetUserValue = targetUserRef.current?.value
+
+        if (!targetUserValue) {
+            return
+        };
+
         const { data, error } = await supabase
         .from('Targets')
         .insert([
-        { title: targetUser, status: false, user_id: userId },
+        { title: targetUserValue, status: false, user_id: userId },
         ])
         .select()
         if (!error) {
             setTargets((prevTargets) => [...prevTargets, ...data])
-            setTargetUser("")
+            if (targetUserRef.current) {
+                targetUserRef.current.value = "";
+            }
             return
         }
         setError(true)
     }
 
     const randomComments = () => {
-        const value = Math.floor(Math.random() * 3);
-        return comments[value]
+        const value = targets.length % 10;
+        console.log(value)
+        return COMMENTS[value]
     }
 
-    const comments = [
+    const COMMENTS = [
+        "一番良いのは借りを作らないことだと思うよ、、、",
+        "自分を見直してみない、、、？",
+        "たくさんの人に迷惑かけてるね、、、",
+        "一番良いのは借りを作らないことだと思うよ、、、",
+        "自分を見直してみない、、、？",
+        "たくさんの人に迷惑かけてるね、、、",
         "一番良いのは借りを作らないことだと思うよ、、、",
         "自分を見直してみない、、、？",
         "たくさんの人に迷惑かけてるね、、、",
@@ -91,7 +109,7 @@ export default function Sideber({setTitle}: {setTitle: setTitleType}) {
                 ))}
                 <h2 className="text-xs font-bold text-slate-200 mt-4 mb-2">■ 債権者新規作成</h2>
                 <form>
-                    <input type="text" value={targetUser} placeholder="債権者名" className="text-black px-1 rounded-md" onChange={(e) => setTargetUser(e.target.value)}/>
+                    <input type="text" placeholder="債権者名" className="text-black px-1 rounded-md" ref={targetUserRef}/>
                     {error && <p className="text-red-400 text-sm">作成に失敗しました</p>}
                     <button className=" text-emerald-400 py-1 px-4 bg-white rounded-md mt-2 shadow-sm" onClick={handleSubmit}>作成</button>
                 </form>

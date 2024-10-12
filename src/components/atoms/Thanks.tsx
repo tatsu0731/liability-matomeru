@@ -21,6 +21,11 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     const [hover, setHover] = useState(false)
 
     const handleDeleteTarget = async() => {
+        await supabase
+        .from('Thanks')
+        .delete()
+        .eq('target_id', target.id);
+
         const { error } = await supabase
         .from('Targets')
         .delete()
@@ -28,6 +33,7 @@ export default function Thanks({target, setTargets}: ThanksProps) {
         if (!error) {
             setTargets(prevTargets => prevTargets.filter(t => t.id !== target.id));
         }
+        console.log(error)
     }
 
     // 10文字以上を...で置換する関数
