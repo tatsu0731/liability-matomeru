@@ -21,6 +21,11 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     const [hover, setHover] = useState(false)
 
     const handleDeleteTarget = async() => {
+        await supabase
+        .from('Thanks')
+        .delete()
+        .eq('target_id', target.id);
+
         const { error } = await supabase
         .from('Targets')
         .delete()
@@ -28,6 +33,7 @@ export default function Thanks({target, setTargets}: ThanksProps) {
         if (!error) {
             setTargets(prevTargets => prevTargets.filter(t => t.id !== target.id));
         }
+        console.log(error)
     }
 
     // 10文字以上を...で置換する関数
@@ -40,7 +46,7 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     }
 
     const countThanks = (thanks:number) => {
-        if (thanks !== 0) {
+        if (thanks !== 0 && thanks !== undefined) {
             return (`( ${thanks} )`)
         }
     }
@@ -48,7 +54,7 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     return(
         <div className={hover ? "flex justify-between mt-1 bg-white/40 rounded-md" : "flex justify-between mt-1"} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <Link href={`/${target.id}`} key={target.id}>
-                <p className="ml-2 min-w-40">{replaceTitle(target.title)} <span className=" text-red-400">{countThanks(target.Thanks.length)}</span></p>
+                <p className="ml-2 min-w-40">{replaceTitle(target.title)} <span className=" text-red-400">{countThanks(target.Thanks?.length)}</span></p>
             </Link>
             {hover && <p className="text-white mr-2 cursor-pointer" onClick={handleDeleteTarget}>×</p>}
         </div>
