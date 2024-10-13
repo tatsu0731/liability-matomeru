@@ -8,7 +8,6 @@ export default function Create() {
     const [description, setDescription] = useState<string>("");
 
     const router = useRouter();
-    console.log(router.query.id)
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();

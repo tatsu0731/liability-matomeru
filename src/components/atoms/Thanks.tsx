@@ -21,6 +21,19 @@ export default function Thanks({target, setTargets}: ThanksProps) {
     const [hover, setHover] = useState(false)
 
     const handleDeleteTarget = async() => {
+        if (target.Thanks?.length === 0) {
+            const { error } = await supabase
+            .from('Targets')
+            .delete()
+            .eq('id', target.id)
+            if (!error) {
+                setTargets(prevTargets => prevTargets.filter(t => t.id !== target.id));
+            }
+            return
+        }
+
+        alert("本当に消して良いですか？")
+
         await supabase
         .from('Thanks')
         .delete()
@@ -33,7 +46,6 @@ export default function Thanks({target, setTargets}: ThanksProps) {
         if (!error) {
             setTargets(prevTargets => prevTargets.filter(t => t.id !== target.id));
         }
-        console.log(error)
     }
 
     // 10文字以上を...で置換する関数
