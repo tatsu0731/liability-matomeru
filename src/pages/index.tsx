@@ -1,3 +1,5 @@
+import Alert from "@/components/atoms/Alert";
+
 export default function Home() {
 
   return (

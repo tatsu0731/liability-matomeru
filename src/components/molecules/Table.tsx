@@ -80,12 +80,12 @@ export default function Table() {
 
     return (
         <section>
-                <div className="flex justify-end mt-10 mr-24">
+                <div className="flex justify-end mt-10 mr-24 mb-2">
                 <Link href={`/${id}/create`}>
                     <button className={`font-bold text-white text-md bg-orange-400 py-2 px-8 bg-orange-4000 rounded-lg shadow hover:bg-orange-600`}>新規作成</button>
                 </Link>
                 </div>
-                <div className="flex flex-col py-4 px-24 gap-4">
+                <div className="flex flex-col py-4 px-24 gap-4 h-600 overflow-y-auto">
                     {thanks.map((thank) => (
                         <div key={thank.id} className={`border-2 rounded-md ${isMoreThan14DaysAgo(thank.created_at) ? "border-red-300" : ""}`}>
                             <div className="py-2 px-8 flex flex-col gap-y-4 text-slate-600">
